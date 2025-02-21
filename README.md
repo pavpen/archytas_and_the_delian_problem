@@ -33,7 +33,7 @@ To build the CSS, JavaScript, and HTML:
 npm run build:prod
 ```
 
-The output will be in `dist/`. You can view it locally in a Web browser,
+The output will be in `build/dist/`. You can view it locally in a Web browser,
 or publish it to the Web.
 
 ## Development Notes
