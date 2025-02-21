@@ -1,0 +1,30 @@
+// TypeScript transpiler configuration for code-generating code.
+//
+// This is separate from the configuration for code which can run in the
+// browser.  The code transpiled with this configuration will be run by
+// Node.js only during the build phase.
+{
+    "exclude": [
+        "../node_modules",
+        "**/*.spec.ts"
+    ],
+    "compilerOptions": {
+        "outDir": "../build/code_gen/",
+        "sourceMap": true,
+        "noImplicitAny": true,
+        "module": "CommonJS",
+        "target": "es6",
+        "jsx": "react",
+        "allowJs": true,
+        "moduleResolution": "node",
+        "downlevelIteration": true,
+        // "baseUrl": "../src/ts",
+        // "paths": {
+        //     "*": [
+        //         "./",
+        //         "./src/ts",
+        //         "../../../src/ts"
+        //     ]
+        // }
+    }
+}

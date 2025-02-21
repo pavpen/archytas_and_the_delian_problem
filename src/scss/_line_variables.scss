@@ -1,0 +1,16 @@
+$main_line_thickness: 4pt;
+$main_line_is_dashed: false;
+$secondary_line_thickness: 1.5pt;
+$secondary_line_is_dashed: false;
+$auxiliary_line_thickness: 1.5pt;
+$auxiliary_line_is_dashed: true;
+
+// Export to JavaScript:
+:export {
+    mainLineThickness_px: 0px + $main_line_thickness;
+    mainLineIsDashed: $main_line_is_dashed;
+    secondaryLineThickness_px: 0px + $secondary_line_thickness;
+    secondaryLineIsDashed: $secondary_line_is_dashed;
+    auxiliaryLineThickness_px: 0px + $auxiliary_line_thickness;
+    auxiliaryLineIsDashed: $auxiliary_line_is_dashed;
+}

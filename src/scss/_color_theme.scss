@@ -1,0 +1,98 @@
+@use 'accordion.scss' as accordion;
+@use 'input_range_theme.scss' as input-range;
+@use 'sass:color';
+
+@mixin main-theme($theme-name,
+    $primary,
+    $primary-variant,
+    $secondary,
+    $secondary-variant,
+    $error,
+
+    $primary-bg,
+    $secondary-bg,
+
+    $primary-fg,
+    $secondary-fg,
+    $error-fg) {
+
+    body.#{$theme-name}-theme {
+        color: $primary-fg;
+        background-color: $primary-bg;
+    }
+
+    .#{$theme-name}-theme {
+        @include input-range.theme($track-color: $primary-bg,
+            $thumb-color: $primary-fg,
+            $thumb-border-color: $primary-bg,
+            $track-border-color: $primary-bg);
+        @include accordion.theme($unopened_label_background: $primary);
+
+        .color-theme-button-container {
+            .color-theme-item-container {
+                background-color: color.adjust($color: $primary-bg, $alpha: -0.4);
+            }
+        }
+
+        input[type=number] {
+            color: $primary-fg;
+            background-color: $primary-bg;
+        }
+
+        .article-container {
+            .article {
+                background-color: $secondary-bg;
+            }
+        }
+
+        .article {
+            box-shadow: 1.5pt 1.5pt 0.75pt 1pt color.adjust($color: $secondary-bg, $lightness: -12%);
+        }
+
+        .footnotes-start {
+            border-top-color: $primary-fg;
+        }
+
+        .footnote-container.in-view {
+            background-color: $secondary-bg;
+            box-shadow: 1pt 1pt 1pt 1pt color.adjust($color: $secondary-bg, $lightness: -12%);
+        }
+
+        .footnote-container.in-view>div {
+            border: 0.5pt solid $primary-bg;
+            padding-top: 0.5em;
+        }
+
+        .error-message {
+            background-color: $error;
+            color: $error-fg;
+        }
+
+        .model-controls {
+            background-color: $primary;
+            color: $secondary-fg;
+        }
+
+        .cylinder-controls {
+            background-color: $primary-variant;
+        }
+
+        .torus-controls {
+            background-color: $primary;
+        }
+
+        .cone-controls {
+            background-color: $secondary;
+        }
+
+        .main-line,
+        .secondary-line,
+        .auxiliary-line {
+            stroke: $primary-fg;
+        }
+
+        svg text {
+            fill: $primary-fg;
+        }
+    }
+}

@@ -1,0 +1,32 @@
+@use 'sass:string';
+
+@function kebab-to-camel-case($kebab-case-str) {
+    $result: '';
+    $word-break-ch: '-';
+    $multi-word-break-replace-ch: '_';
+    $capitalize-next: false;
+    $multi-word-break: false;
+
+    @for $i from 1 through string.length($kebab-case-str) {
+        $ch: string.slice($kebab-case-str, $i, $i);
+
+        @if ($ch == $word-break-ch) {
+            @if ($capitalize-next or $multi-word-break) {
+                // More than one `$word-break-ch` in a row. Replace the ones
+                // after the first one with `$multi-word-break-replace-ch`:
+                $result: $result + $multi-word-break-replace-ch;
+                $capitalize-next: false;
+                $multi-word-break: true;
+            } @else {
+                $capitalize-next: true;
+            }
+        } @else if ($capitalize-next) {
+            $result: $result + string.to-upper-case($ch);
+            $capitalize-next: false;
+        } @else {
+            $result: $result + $ch;
+        }
+    }
+
+    @return $result;
+}

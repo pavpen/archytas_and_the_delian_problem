@@ -1,0 +1,10 @@
+@use 'color_themes.scss';
+@use 'strings.scss';
+
+
+// Export to JavaScript:
+:export {
+    @each $var-name, $value in color_themes.$light-color-map {
+        #{strings.kebab-to-camel-case($var-name)}: $value;
+    }
+}

@@ -1,0 +1,357 @@
+@use 'line_variables.scss' as lines;
+@use 'color_themes.scss' as colors;
+@use 'accordion.scss';
+@use 'range_control.scss';
+@use 'color_theme.scss' as color_theme;
+
+@include color_theme.main-theme(colors.$light-color-map...);
+@include color_theme.main-theme(colors.$dark-color-map...);
+
+@media only screen {
+    body {
+        margin: 0;
+    }
+
+    .text-body,
+    .footnote-container>div {
+        padding-left: 1.5em;
+        padding-right: 1.5em;
+    }
+
+    .color-theme-button-container {
+        top: 0em;
+        right: 0em;
+    }
+
+    .model-container {
+        height: 100vh;
+    }
+}
+
+@media only screen and (min-width: 900px) {
+    body {
+        margin: 1em;
+    }
+
+    .text-body,
+    .footnote-container>div {
+        padding-left: min(7em, 16%);
+        padding-right: min(7em, 16%);
+    }
+
+    .color-theme-button-container {
+        top: 1em;
+        right: 1em;
+    }
+
+    .model-container {
+        height: calc(100vh - 2em);
+    }
+}
+
+body {
+    font-size: 12pt;
+}
+
+.color-theme-button-container {
+    position: fixed;
+
+    >label {
+        text-align: right;
+        display: block;
+    }
+
+    >.color-theme-item-container {
+        overflow: hidden;
+        max-height: 0;
+        transition: all .35s;
+    }
+
+    input.color-theme-button {
+        display: none;
+    }
+
+    input.color-theme-button:checked~.color-theme-item-container {
+        max-height: 100vh;
+    }
+
+    .color-theme-item {
+        input {
+            appearance: none;
+            width: 1.5em;
+        }
+
+        input:checked::before {
+            content: '🖌️';
+        }
+    }
+
+    .os-default-theme-darkness {
+        .color-theme-item {
+            input:checked::before {
+                content: '🌻';
+            }
+        }
+    }
+}
+
+.article-container {
+    width: 100%;
+    text-align: center;
+}
+
+.article {
+    text-align: justify;
+    padding-top: 7em;
+    padding-bottom: 7em;
+    display: inline-block;
+    // column-width: 20em;
+    counter-reset: body-foot-mark;
+}
+
+.article,
+.footnote-container.in-view {
+    max-width: 51em;
+}
+
+h1 {
+    text-align: center;
+}
+
+.author {
+    text-align: center;
+    font-size: large;
+    margin-bottom: 1.5em;
+}
+
+.date {
+    text-align: center;
+    font-size: large;
+    margin-bottom: 3em;
+}
+
+span.title {
+    font-style: italic;
+}
+
+p {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+p+p {
+    text-indent: 1em;
+}
+
+.thought-break {
+    text-align: center;
+    text-indent: 0;
+    margin-top: 1.5em;
+    margin-bottom: 1.5em;
+}
+
+.footnote-foot-mark::before {
+    counter-increment: footnote-foot-mark;
+    content: counter(footnote-foot-mark);
+    vertical-align: super;
+    font-size: smaller;
+}
+
+.body-foot-mark::before {
+    counter-increment: body-foot-mark;
+    content: counter(body-foot-mark);
+    vertical-align: super;
+    font-size: smaller;
+}
+
+.footnote-container {
+    margin-top: 1em;
+    position: relative;
+    transition: all .35s;
+    counter-reset: footnote-foot-mark;
+}
+
+.footnote-container.in-view {
+    max-height: 33vh;
+    position: fixed;
+    bottom: 0px;
+}
+
+.footnotes-start {
+    width: 100%;
+    max-width: 8em;
+    border-top: 1pt solid;
+}
+
+.footnotes {
+    position: relative;
+    overflow: auto;
+}
+
+.footnote {
+    text-indent: 1em;
+}
+
+.error-message {
+    margin: 0;
+}
+
+.error-message:not(:empty) {
+    margin: 1em;
+}
+
+.model-controls {
+    padding: 0.5em;
+}
+
+#angle-oap {
+    margin-left: 0.5em;
+}
+
+.cylinder-controls,
+.torus-controls,
+.cone-controls {
+    display: inline-block;
+    padding: 0.5em;
+
+    .range-control-container input[type=number] {
+        width: 3em;
+    }
+
+    .range-control-container input[type=range] {
+        width: 5em;
+    }
+}
+
+.cylinder-controls>div,
+.torus-controls>div,
+.cone-controls>div {
+    display: inline-block;
+}
+
+.cylinder-controls>label,
+.torus-controls>label,
+.cone-controls>label {
+    display: inline-block;
+}
+
+.model-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-top: 1em;
+}
+
+.model-scene {
+    width: 100%;
+    min-height: 25vh;
+    flex-grow: 100;
+    overflow: hidden;
+    position: relative;
+}
+
+.model-scene .pt-label {
+    position: absolute;
+}
+
+.article svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+svg {
+    font-size: 36pt;
+}
+
+svg .pt-label.label-pos-n {
+    text-anchor: middle;
+    dominant-baseline: text-after-edge;
+}
+
+svg .pt-label.label-pos-s {
+    text-anchor: middle;
+    dominant-baseline: text-before-edge;
+}
+
+svg .pt-label.label-pos-e {
+    text-anchor: start;
+    dominant-baseline: middle;
+}
+
+svg .pt-label.label-pos-w {
+    text-anchor: end;
+    dominant-baseline: middle;
+}
+
+svg .pt-label.label-pos-ne {
+    text-anchor: start;
+    dominant-baseline: text-after-edge;
+}
+
+svg .pt-label.label-pos-nw {
+    text-anchor: end;
+    dominant-baseline: text-after-edge;
+}
+
+svg .pt-label.label-pos-se {
+    text-anchor: start;
+    dominant-baseline: text-before-edge;
+}
+
+svg .pt-label.label-pos-sw {
+    text-anchor: end;
+    dominant-baseline: text-before-edge;
+}
+
+#canvas-container {
+    width: 100%;
+    height: 100%;
+}
+
+// SVG Lines:
+
+.main-line {
+    stroke-width: lines.$main_line_thickness;
+    stroke-linecap: round;
+
+    @if lines.$main_line_is_dashed {
+        stroke-dasharray: 15;
+    }
+
+    fill: none;
+
+    &.point-mark {
+        stroke-width: calc(1.5 * lines.$main_line_thickness);
+    }
+}
+
+.secondary-line {
+    stroke-width: lines.$secondary_line_thickness;
+    stroke-linecap: round;
+
+    @if lines.$secondary_line_is_dashed {
+        stroke-dasharray: 15;
+    }
+
+    fill: none;
+
+    &.point-mark {
+        stroke-width: lines.$main_line_thickness;
+    }
+}
+
+.auxiliary-line {
+    stroke-width: lines.$auxiliary_line_thickness;
+    stroke-linecap: round;
+
+    @if lines.$auxiliary_line_is_dashed {
+        stroke-dasharray: 15;
+    }
+
+    fill: none;
+
+    &.point-mark {
+        stroke-width: lines.$secondary_line_thickness;
+    }
+}

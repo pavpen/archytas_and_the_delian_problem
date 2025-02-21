@@ -1,0 +1,36 @@
+// Use hyphenated names as keys.  The Sass interpreter may convert underscores
+// to hyphens in parameter variable names.  So, having underscores in value
+// keys here may break when passing a map as keyword arguments to a @mixin.
+$light-color-map: (
+    'theme-name': light,
+    'primary': #0053ee,
+    'primary-variant': #7100b3,
+    'secondary': #03da80,
+    'secondary-variant': #bd8a00,
+    'error': #b00020,
+
+    // You can put primary, and secondary colors on these backgrounds:
+    'primary-bg': #e1e2e1,
+    'secondary-bg': #f5f5f6,
+
+    'primary-fg': #202020,
+    'secondary-fg': #f5f5f6,
+    'error-fg': #fefefe,
+);
+
+$dark-color-map: (
+    'theme-name': dark,
+    'primary': #7c5f0e,
+    'primary-variant': #7100b3,
+    'secondary': #03da80,
+    'secondary-variant': #0053ee,
+    'error': #b00020,
+
+    // You can put primary, and secondary colors on these backgrounds:
+    'primary-bg': #101009,
+    'secondary-bg': #0f0e0f,
+
+    'primary-fg': #b1a698,
+    'secondary-fg': #0f0e0f,
+    'error-fg': #101009,
+);

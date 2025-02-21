@@ -1,0 +1,86 @@
+@use 'sass:color';
+
+@mixin theme($unopened_label_background,
+    $unopened_label_hover_background: color.adjust($unopened_label_background, $lightness: -10%),
+    $opened_label_background: $unopened_label_background,
+    $opened_label_hover_background: $unopened_label_hover_background,
+) {
+    .accordion-container {
+        border-radius: 8px;
+        border: solid 1px $unopened_label_hover_background;
+
+        // &:hover {
+        //     box-shadow: 0 4px 4px -2px rgba(0, 0, 0, 0.5);
+        // }
+    }
+
+    .accordion-item {
+        &-label {
+            padding: 0.5em;
+            background: $unopened_label_background;
+            font-weight: bold;
+            cursor: pointer;
+
+            &:hover {
+                background: $unopened_label_hover_background;
+            }
+
+            &::after {
+                content: "❯";
+                width: 1em;
+                height: 1em;
+                text-align: center;
+                transition: all .35s;
+            }
+        }
+
+        &-content {
+            transition: all .35s;
+        }
+    }
+
+    // Opened accordion:
+    .accordion-item>input:checked {
+        +.accordion-item-label {
+            background: $opened_label_background;
+
+            &:hover {
+                background: $opened_label_hover_background;
+            }
+
+            &::after {
+                transform: rotate(90deg);
+            }
+        }
+    }
+}
+
+.accordion-container {
+    overflow: hidden;
+}
+
+.accordion-item {
+    width: 100%;
+    overflow: hidden;
+
+    input[type=checkbox] {
+        display: none;
+    }
+
+    &-label {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    // Closed accordion:
+    &-content {
+        max-height: 0;
+    }
+}
+
+// Opened accordion:
+.accordion-item>input:checked {
+    ~.accordion-item-content {
+        max-height: 100vh;
+    }
+}
